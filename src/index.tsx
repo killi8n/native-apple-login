@@ -1,9 +1,30 @@
-import { NativeModules } from 'react-native';
+import { NativeModules, NativeEventEmitter } from 'react-native';
 
-type NativeAppleLoginType = {
-  multiply(a: number, b: number): Promise<number>;
+export enum EventNames {
+  CredentialStateChanged = 'credentialStateChanged',
+}
+
+interface LoginResult {
+  authorizationCode: string;
+  authorizedScopes: string[];
+  fullName?: string;
+  identityToken: string;
+  email?: string;
+  realUserStatus?: any;
+  user: string;
+}
+
+export interface CredentialStateChangedResult {
+  state: 'authorized' | 'revoked' | 'notfound' | 'transferred' | 'error';
+  error?: string;
+}
+
+type NaitveAppleLoginType = {
+  login: () => Promise<LoginResult>;
+  getCredentialState: (userId: string) => void;
 };
 
-const { NativeAppleLogin } = NativeModules;
+const { NaitveAppleLogin } = NativeModules;
+export const Events = new NativeEventEmitter(NaitveAppleLogin);
 
-export default NativeAppleLogin as NativeAppleLoginType;
+export default NaitveAppleLogin as NaitveAppleLoginType;
