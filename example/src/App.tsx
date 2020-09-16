@@ -29,7 +29,9 @@ export default function App() {
           try {
             const result = await NaitveAppleLogin.login();
             console.log(result);
-            NaitveAppleLogin.getCredentialState('USER_IDENTIFIER - .user property');
+            NaitveAppleLogin.getCredentialState(
+              'USER_IDENTIFIER - .user property'
+            );
           } catch (e) {
             console.error(e);
           }
@@ -39,7 +41,9 @@ export default function App() {
         title="GET CREDENTIAL STATE"
         onPress={async () => {
           try {
-            NaitveAppleLogin.getCredentialState('USER_IDENTIFIER - .user property');
+            NaitveAppleLogin.getCredentialState(
+              'USER_IDENTIFIER - .user property'
+            );
           } catch (e) {
             console.error(e);
           }
