@@ -12,7 +12,7 @@ export default function App() {
     eventSubscription.current = Events.addListener(
       EventNames.CredentialStateChanged,
       ({ state, error }: CredentialStateChangedResult) => {
-        console.log('cdh-debug', state, error);
+        console.log(state, error);
       }
     );
     return () => {
@@ -29,7 +29,7 @@ export default function App() {
           try {
             const result = await NaitveAppleLogin.login();
             console.log(result);
-            NaitveAppleLogin.getCredentialState('');
+            NaitveAppleLogin.getCredentialState('USER_IDENTIFIER - .user property');
           } catch (e) {
             console.error(e);
           }
@@ -39,7 +39,7 @@ export default function App() {
         title="GET CREDENTIAL STATE"
         onPress={async () => {
           try {
-            NaitveAppleLogin.getCredentialState('');
+            NaitveAppleLogin.getCredentialState('USER_IDENTIFIER - .user property');
           } catch (e) {
             console.error(e);
           }
