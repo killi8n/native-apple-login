@@ -3,3 +3,4 @@ example/
 .circleci/
 node_modules/
 src/
+android/

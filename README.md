@@ -1,27 +1,53 @@
 # native-apple-login
 
-apple login modules for react native
+## installation
 
-## Installation
-
-```sh
-npm install native-apple-login
+```bash
+$ yarn add native-apple-login
+$ cd ios
+$ pod install
 ```
-
-## Usage
+## how to use
 
 ```js
-import NativeAppleLogin from "native-apple-login";
+import AppleLogin from "native-apple-login";
 
-// ...
-
-const result = await NativeAppleLogin.multiply(3, 7);
+const login = async () => {
+    const result = await AppleLogin.login();
+}
 ```
 
-## Contributing
+> Apple Credential State Change Listener
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+```js
+import AppleLogin, {
+  Events,
+  EventNames,
+  CredentialStateChangedResult,
+} from 'native-apple-login';
 
-## License
+export default function App() {
+    const eventSubscription = React.useRef<EmitterSubscription | null>(null);
 
-MIT
+    React.useEffect(() => {
+        eventSubscription.current = Events.addListener(
+        EventNames.CredentialStateChanged,
+            ({ state, error }: CredentialStateChangedResult) => {
+                if (state === "revoked") {
+                    logout();
+                }
+            }
+        );
+        return () => {
+            if (eventSubscription && eventSubscription.current) {
+                eventSubscription.current.remove();
+            }
+        };
+    }, []);
+
+    const fetchList = async () => {
+        NaitveAppleLogin.getCredentialState(await AsyncStorage.getUserAppleId());
+        await getList();
+    }
+}
+```
