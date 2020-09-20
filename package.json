@@ -1,6 +1,6 @@
 {
   "name": "native-apple-login",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "apple login modules for react native",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -10,7 +10,6 @@
   "files": [
     "src",
     "lib",
-    "android",
     "ios",
     "cpp",
     "native-apple-login.podspec",
